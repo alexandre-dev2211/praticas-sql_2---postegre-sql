@@ -1,0 +1,15 @@
+-- Alterando Tabelas com o Comando 'ALTER' --
+
+ALTER TABLE tipos_produtos ADD peso DECIMAL(8,2);
+
+-- Verificando se a Tabela foi Alterada --
+
+SELECT * FROM tipos_produtos;
+
+-- Excluindo Tabelas com o Comando 'DROP' (Não exclui tabelas com relacionamentos) --
+
+DROP TABLE tipos_produtos;
+
+-- Excluindo a Base de Dados com o Comando 'DROP' (Não exclui o Banco de Dados com conexão aberta) --
+
+DROP DATABASE secao_04;

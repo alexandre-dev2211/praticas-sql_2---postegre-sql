@@ -1,0 +1,37 @@
+-- Criando um Usuário no Banco de Dados --
+
+CREATE USER estagiario WITH PASSWORD '123456';
+
+-- Concedendo Privilégios ao Usuário --
+
+GRANT ALL ON produtos TO estagiario;
+
+-- Criando a Tabela empresas --
+
+CREATE TABLE empresas(id_empresa serial not null primary key,
+nome varchar(50) not null, funcionarios int not null, 
+cidade varchar(50) not null);
+					   				  
+-- Inserindo Dados na Tabela --
+
+INSERT INTO empresas (nome, funcionarios, cidade) VALUES ('Apple', 4500, 'Cupertino');
+INSERT INTO empresas (nome, funcionarios, cidade) VALUES ('Microsoft', 235000, 'Palo Alto');
+INSERT INTO empresas (nome, funcionarios, cidade) VALUES ('Amazon', 9000, 'Santos');
+
+-- Selecionando Dados na Tabela empresas --
+
+SELECT * FROM empresas;
+
+-- Atualizando Dados da Tabela --
+
+UPDATE empresas SET funcionarios = 1500 WHERE id_empresa = 3;
+
+-- Deletando Dados da Tabela --
+
+DELETE FROM empresas WHERE id_empresa = 2;
+
+-- Removendo Permissões de um Usuário --
+
+REVOKE ALL ON empresas FROM estagiario;
+
+

@@ -1,0 +1,56 @@
+-- Criando Tabelas --
+
+CREATE TABLE categorias(
+id SERIAL PRIMARY KEY,
+nome VARCHAR(60) NOT NULL);
+
+CREATE TABLE produtos(
+id SERIAL PRIMARY KEY,
+descricao VARCHAR(60) NOT NULL,
+preco_venda DECIMAL(8,2) NOT NULL,
+preco_custo MONEY NOT NULL,
+id_categoria INT REFERENCES categorias(id) NOT NULL);
+
+-- Populando ou Inserindo Dados --
+
+INSERT INTO categorias (nome) VALUES ('Material Escolar');
+INSERT INTO categorias (nome) VALUES ('Acessório de Informática');
+INSERT INTO categorias (nome) VALUES ('Material de Escritório');
+INSERT INTO categorias (nome) VALUES ('Game');
+
+INSERT INTO produtos (descricao, preco_venda, preco_custo, id_categoria) VALUES ('Carbono', 5.45, 2.30, 1);
+INSERT INTO produtos (descricao, preco_venda, preco_custo, id_categoria) VALUES ('Caneta', 1.20, 0.45, 1);
+INSERT INTO produtos (descricao, preco_venda, preco_custo, id_categoria) VALUES ('Pendrive 32 GB', 120.54, 32.00, 2);
+INSERT INTO produtos (descricao, preco_venda, preco_custo, id_categoria) VALUES ('Mouse', 17.00, 4.30, 2);
+
+-- Funções de Agregação --
+
+-- Máximo MAX --
+
+SELECT MAX (preco_venda) FROM produtos;
+
+-- Mínimo MIN --
+
+SELECT MIN (preco_venda) FROM produtos;
+
+-- Average AVG --
+
+SELECT AVG (preco_venda) FROM produtos;
+
+-- Convertendo o Valor para Texto --
+
+SELECT TO_CHAR(AVG(preco_venda), '9999999999') AS Media FROM produtos;
+
+-- Calculando a Media do Valor Money --
+
+SELECT ROUND(AVG(preco_custo::numeric), 2) FROM produtos;
+
+SELECT ROUND(AVG(preco_venda), 2) FROM produtos;
+
+-- Contando Elementos - COUNT --
+
+SELECT COUNT(preco_venda) AS Quantidade FROM produtos WHERE id_categoria = 1;
+
+-- Agrupando - GROUP BY --
+
+SELECT id_categoria, MAX(preco_venda) FROM produtos GROUP BY id_categoria;

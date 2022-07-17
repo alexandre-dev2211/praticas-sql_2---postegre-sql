@@ -1,0 +1,8 @@
+-- Realizando Consultas em Múltiplas Tabelas --
+
+SELECT * FROM produtos;
+
+SELECT * FROM tipos_produto;
+
+SELECT p.codigo, p.descricao, p.preco, tp.descricao FROM 
+produtos AS p, tipos_produto AS tp WHERE p.codigo_tipo = tp.codigo;

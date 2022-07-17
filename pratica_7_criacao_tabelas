@@ -1,0 +1,44 @@
+-- Criando Tabelas --
+
+CREATE TABLE tipos_produtos(id serial primary key, descricao character varying(50) not null);
+
+CREATE TABLE produtos(
+id serial primary key, descricao character varying(50) not null, 
+preco money not null, id_tipo_produto int references tipos_produtos(id) not null);
+					  
+CREATE TABLE pacientes(id serial primary key, nome character varying(50) not null, 
+endereco character varying(50) not null, bairro character varying(50) not null,
+cidade varchar(40) not null, estado char(2) not null, cep varchar(9) not null,
+data_nascimento date not null);		
+					  
+CREATE TABLE professores(id serial primary key, telefone int not null, nome varchar(50) not null);
+						 
+CREATE TABLE turmas(id serial primary key, capacidade int not null, id_professores int references professores(id) not null);	
+
+-- Inserindo, Populando e Consultando Tabelas --
+
+INSERT INTO tipos_produtos (descricao) VALUES ('Computadores');
+INSERT INTO tipos_produtos (descricao) VALUES ('Impressoras');
+INSERT INTO tipos_produtos (descricao) VALUES ('Acessórios');
+
+SELECT * FROM tipos_produtos;
+
+INSERT INTO produtos (descricao, preco, id_tipo_produto) VALUES ('Notebook Dell 1544', 2345.67, 1);
+INSERT INTO produtos (descricao, preco, id_tipo_produto) VALUES ('Impr. Jato de Tinta', 456.00, 2);
+INSERT INTO produtos (descricao, preco, id_tipo_produto) VALUES ('Mouse Sem Fio', 45.00, 3);
+
+SELECT * FROM produtos;
+
+INSERT INTO pacientes (nome, endereco, bairro, cidade, estado, cep, data_nascimento) VALUES 
+('Alexandre Silva','Rua Campinas, 168', 'Boqueirão', 'Praia Grande', 'SP', 11701-110, '1992-11-22');
+
+SELECT * FROM pacientes;
+
+INSERT INTO pacientes (nome, endereco, bairro, cidade, estado, cep, data_nascimento) VALUES 
+('Amanda Bezerra','Rua Campinas, 160', 'Boqueirão', 'Praia Grande', 'SP', 11701-110, '1991-01-01');
+INSERT INTO pacientes (nome, endereco, bairro, cidade, estado, cep, data_nascimento) VALUES 
+('Luiz Henrique','Rua Augusto Farina, 960', 'Butantã', 'São Paulo', 'SP', 077090-032, '1982-11-22');
+INSERT INTO pacientes (nome, endereco, bairro, cidade, estado, cep, data_nascimento) VALUES 
+('Geane Ferreira','Avenida Nhandú, 168', 'Planalto Paulista', 'São Paulo', 'SP', 12003-987, '1962-11-12');
+
+SELECT * FROM pacientes;

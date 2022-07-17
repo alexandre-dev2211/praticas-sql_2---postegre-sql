@@ -1,0 +1,36 @@
+--Criando a Base de Dados--
+
+CREATE DATABASE informatica_db;
+
+--Criando Tabelas--
+
+CREATE TABLE tipos_produtos(codigo SERIAL PRIMARY KEY, descricao VARCHAR(30) NOT NULL);
+						   
+CREATE TABLE produtos(codigo SERIAL PRIMARY KEY,
+descricao VARCHAR(30) NOT NULL,
+preco MONEY NOT NULL,
+codigo_tipo INT REFERENCES tipos_produtos(codigo) NOT NULL);
+
+--Inserindo ou Populando Tabelas--
+
+INSERT INTO tipos_produtos (descricao) VALUES ('Computador');
+INSERT INTO tipos_produtos (descricao) VALUES ('Impressora');
+
+INSERT INTO produtos (descricao, preco, codigo_tipo) VALUES ('Desktop', '1900', 1);
+INSERT INTO produtos (descricao, preco, codigo_tipo) VALUES ('Laptop', '2050', 1);
+INSERT INTO produtos (descricao, preco, codigo_tipo) VALUES ('Impressora DeskJet', '900', 2);
+INSERT INTO produtos (descricao, preco, codigo_tipo) VALUES ('Impressora Laser', '3500', 2);
+
+--Realizando Query's ou Consultas--
+
+SELECT * FROM tipos_produtos;
+
+SELECT codigo, descricao FROM tipos_produtos;
+
+SELECT * FROM produtos;
+
+SELECT codigo, descricao, codigo_tipo FROM produtos;
+
+--Utilizando o 'ALIAS(AS)' para Consultas--
+
+SELECT p.codigo AS cod, p.descricao AS descr, p.preco AS pre, p.codigo_tipo AS ctp FROM produtos AS p;

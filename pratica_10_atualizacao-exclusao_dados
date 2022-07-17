@@ -1,0 +1,27 @@
+-- Realizando Atualizações na Base de Dados com 'UPDATE'--
+
+UPDATE tipos_produtos SET descricao = 'Nobreak' WHERE codigo = 2;
+
+-- Verificando se os Dados foram Atualizados --
+
+SELECT * FROM tipos_produtos;
+
+UPDATE produtos SET  descricao = 'Notebook', preco = '2800' WHERE codigo = 2;
+
+-- Verificando se os Dados foram Atualizados --
+
+SELECT * FROM produtos;
+
+-- Deletando Dados com o Comando 'DELETE'--
+
+DELETE FROM produtos WHERE codigo >= 3;
+
+-- Verificando se os Dados foram Deletados --
+
+SELECT * FROM produtos;
+
+DELETE FROM tipos_produtos WHERE codigo = 2;
+
+-- Verificando se os Dados foram Deletados --
+
+SELECT * FROM tipos_produtos;

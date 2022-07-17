@@ -1,0 +1,61 @@
+-- Criando Tabelas --
+
+CREATE TABLE profissoes(
+id SERIAL PRIMARY KEY,
+cargo VARCHAR(60) NOT NULL);
+
+CREATE TABLE clientes(
+id SERIAL PRIMARY KEY,
+nome VARCHAR(60) NOT NULL,
+data_nascimento DATE NOT NULL,
+telefone VARCHAR(10) NOT NULL,
+id_profissao INT REFERENCES profissoes(id) NOT NULL);
+
+CREATE TABLE consumidor(
+id SERIAL PRIMARY KEY,
+nome VARCHAR(50) NOT NULL,
+contato VARCHAR(50) NOT NULL,
+endereco VARCHAR(50) NOT NULL,
+cidade VARCHAR(50) NOT NULL,
+cep VARCHAR(20) NOT NULL,
+pais VARCHAR(50) NOT NULL);
+
+-- Populando ou Inserindo Dados nas Tabelas --
+
+INSERT INTO profissoes (cargo) VALUES ('Programador');
+INSERT INTO profissoes (cargo) VALUES ('Analista de Sistemas');
+INSERT INTO profissoes (cargo) VALUES ('Suporte');
+INSERT INTO profissoes (cargo) VALUES ('Gerente');
+
+INSERT INTO clientes (nome, data_nascimento, telefone, id_profissao) VALUES ('João Pereira', '1991-06-15', '1234-8999', 1);
+INSERT INTO clientes (nome, data_nascimento, telefone, id_profissao) VALUES ('Ricardo da Silva', '1973-10-10', '2234-8875', 2);
+INSERT INTO clientes (nome, data_nascimento, telefone, id_profissao) VALUES ('Felipe Oliveira', '1987-08-01', '4589-6322', 3);
+INSERT INTO clientes (nome, data_nascimento, telefone, id_profissao) VALUES ('Mário Pirez', '1991-02-15', '4569-8775', 1);
+
+INSERT INTO consumidor (nome, contato, endereco, cidade, cep, pais) VALUES ('Alfredo Nunes', 'Maria Nunes', 'Rua da Paz, 47', 'São Paulo', '11701-110', 'Brasil');
+INSERT INTO consumidor (nome, contato, endereco, cidade, cep, pais) VALUES ('Anna Trajano', 'Guilherme Souza', 'Rua Dourada, 452', 'Goiânia', '11710-123', 'Brasil');
+INSERT INTO consumidor (nome, contato, endereco, cidade, cep, pais) VALUES ('Leandro Freitas', 'Pedro Siqueira', 'Rua da Várzea, 987', 'São Paulo', '07790-000', 'Brasil');
+
+-- Realizando Junção por Produto Cartesiano --
+
+SELECT c.id, c.nome, c.data_nascimento, c.telefone, p.cargo FROM clientes AS c, profissoes AS p WHERE c.id_profissao = p.id;
+
+-- Inner Join --
+
+SELECT c.id, c.nome, c.data_nascimento, c.telefone, p.cargo FROM clientes AS c INNER JOIN profissoes AS p ON c.id_profissao = p.id;
+
+-- Left Outer Join --
+
+SELECT * FROM clientes LEFT OUTER JOIN profissoes ON clientes.id_profissao = profissoes.id;
+
+-- Right Outer Join --
+
+SELECT * FROM clientes RIGHT OUTER JOIN profissoes ON clientes.id_profissao = profissoes.id;
+
+-- Full Outer Join --
+
+SELECT * FROM clientes FULL OUTER JOIN profissoes ON clientes.id_profissao = profissoes.id;
+
+-- Cross Join --
+
+SELECT c.id, c.nome, c.data_nascimento, c.telefone, p.cargo FROM clientes AS c CROSS JOIN profissoes AS p;
